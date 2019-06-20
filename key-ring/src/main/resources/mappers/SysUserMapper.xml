@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.key.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.key.pojo.SysUser">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="telephone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="dept_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="operator" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, telephone, mail, password, dept_id, status, remark, operator, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.key.pojo.SysUser" keyProperty="id" useGeneratedKeys="true">
+    insert into sys_user (id, name, telephone, 
+      mail, password, dept_id, 
+      status, remark, operator, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.key.pojo.SysUser" keyProperty="id" useGeneratedKeys="true">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+        create_time,
+        update_time
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      now(),now()
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.key.pojo.SysUser">
+    update sys_user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+        update_time = now()
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.key.pojo.SysUser">
+    update sys_user
+    set name = #{name,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="checkUserName" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where name = #{name}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
+  <select id="checkTelephone" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where telephone = #{phone}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
+  <select id="checkEmailExist" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where mail = #{email}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+  </select>
+  <delete id="batchDelete" parameterType="list" >
+    <foreach collection="idArr" item="id" separator=";">
+      delete from sys_user where id = #{id}
+    </foreach>
+  </delete>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where 1 = 1
+    <if test="user.name != null">
+      and name like concat('%', #{user.name},'%')
+    </if>
+    <if test="user.telephone != null">
+      and telephone like concat('%', #{user.telephone}, '%')
+    </if>
+    <if test="user.mail != null">
+      and mail like concat('%', #{user.mail}, '%')
+    </if>
+  </select>
+  <select id="getUserByName" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where name = #{name}
+  </select>
+  <select id="getUserByPhone" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where telephone = #{phone}
+  </select>
+  <select id="getUserByMail" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_user
+    where mail = #{mail}
+  </select>
+</mapper>

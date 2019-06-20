@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.key.dao.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.key.pojo.SysLog">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="method" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="operator" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.key.pojo.SysLogWithBLOBs">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="method" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="operator" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="old_value" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+      <arg column="new_value" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, method, operator, ip, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    old_value, new_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.key.pojo.SysLogWithBLOBs" keyProperty="id" useGeneratedKeys="true">
+    insert into sys_log (id, type, method, 
+      operator, ip, create_time, 
+      update_time, old_value, new_value
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{method,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, now(),
+      now(), #{oldValue,jdbcType=LONGVARCHAR}, #{newValue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.key.pojo.SysLogWithBLOBs" keyProperty="id" useGeneratedKeys="true">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="oldValue != null">
+        old_value,
+      </if>
+      <if test="newValue != null">
+        new_value,
+      </if>
+      create_time,
+      update_time
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="oldValue != null">
+        #{oldValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="newValue != null">
+        #{newValue,jdbcType=LONGVARCHAR},
+      </if>
+      now(), now()
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.key.pojo.SysLogWithBLOBs">
+    update sys_log
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+        update_time = now()
+      <if test="oldValue != null">
+        old_value = #{oldValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="newValue != null">
+        new_value = #{newValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.key.pojo.SysLogWithBLOBs">
+    update sys_log
+    set type = #{type,jdbcType=INTEGER},
+      method = #{method,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      update_time = now(),
+      old_value = #{oldValue,jdbcType=LONGVARCHAR},
+      new_value = #{newValue,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.key.pojo.SysLog">
+    update sys_log
+    set type = #{type,jdbcType=INTEGER},
+      method = #{method,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="listWithBLOBS" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    where 1 = 1
+    <if test="param.type != null">
+      and type = #{param.type}
+    </if>
+    <if test="param.operator != null">
+      and operator like concat("%", #{param.operator},"%")
+    </if>
+    <if test="param.fromTime != null">
+      and update_time >= #{param.fromTime}
+    </if>
+    <if test="param.toTime != null">
+      and #{param.toTime} > update_time
+    </if>
+    order by update_time desc
+  </select>
+</mapper>
