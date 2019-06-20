@@ -9,7 +9,7 @@
 
 <pre>
 |keyring 项目的根模块，管理项目中的依赖
-`---generator 代码生成模块，使用了Mybatis generator的java代码，用来生成dao,pojo代码和dao层对应的xml文件
+`---generator 代码生成模块，使用了Mybatis generator的java代码方式，用来生成dao,pojo代码和dao层对应的xml文件
 `---key-ring  业务模块，整体的代码都在这个模块中
     `-------db     存放着sql文件
     `-------docker 存放着描述系统使用的docker镜像文件，目前就两个mysql和tomcat
