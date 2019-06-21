@@ -41,7 +41,7 @@ public class CorsFilter implements Filter {
         response.addHeader("Access-Control-Allow-Methods", "*");
 
         // 非简单请求通过预检命令请求头字段设置
-        String headers = request.getHeader("Access-Control-Allow-Headers");
+        String headers = request.getHeader("Access-Control-Request-Headers");
         if(!StringUtil.isBlank(headers)) {
             // 支持所有的自定义请求头
             response.addHeader("Access-Control-Allow-Headers", headers);

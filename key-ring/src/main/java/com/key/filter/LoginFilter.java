@@ -56,7 +56,9 @@ public class LoginFilter implements Filter {
 
         // 没有登录用户
         if(currUser == null) {
-            response.sendRedirect("/user/need_login.json");
+            request.getRequestDispatcher("/user/need_login.json").forward(servletRequest, servletResponse);
+            // 对于跨域的预请求，不运行重定向
+//            response.sendRedirect("/user/need_login.json");
             return;
         }
 
