@@ -35,7 +35,7 @@
         <hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
         <guava.version>28.0-jre</guava.version>
         <apache.commons.version>3.5</apache.commons.version>
-        <commons.collections.version>3.2.1</commons.collections.version>
+        <commons.collections.version>3.2.2</commons.collections.version>
         <joda.time.version>2.9.1</joda.time.version>
         <hashids.version>1.0.1</hashids.version>
         <apache.commons.email.version>1.4</apache.commons.email.version>
