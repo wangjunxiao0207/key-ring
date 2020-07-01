@@ -27,7 +27,7 @@
         <logback.version>1.2.3</logback.version>
         <swagger.version>2.9.2</swagger.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <mysql.version>5.1.46</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <lombok.version>1.18.8</lombok.version>
         <easypoi.version>3.2.0</easypoi.version>
         <jwt.version>3.3.0</jwt.version>
