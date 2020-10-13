@@ -47,7 +47,7 @@
         <commons.lang.version>2.6</commons.lang.version>
         <zxing.version>2.1</zxing.version>
         <jedis.version>2.9.0</jedis.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
 
     </properties>
 
